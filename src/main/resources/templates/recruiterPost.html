@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_5ab67db.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/mCustomScrollbar_ac2fb8b.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/layout_cb75ea0.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main_a6d7b89.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/widgets_edb8a0d.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_8e0f641.css">
+<link
+	href="/css/main_16f99127.css"
+	rel="stylesheet">
+<link
+	href="/css/main_16f99127.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_757e2eb.css">
+<title>招聘者界面</title>
+</head>
+<body>
+	<div class="settings-header">
+		<div class="settings-header-title">招聘设置</div>
+		<ul class="settings-header-tab">
+			<li><a href="/recruiter/PersonalInformationLoad"><span
+					class="menu-item">个人信息</span></a><span class="divider"></span></li>
+			<li><a href="/recruiter/IdentityLoad"><span
+					class="menu-item">身份认证</span></a><span class="divider"></span></li>
+			<li><a href="/recruiter/PostLoad"><span
+					class="menu-item menu-item-active">发布职位</span></a><span class="divider"></span></li>
+		</ul>
+	</div>
+	<div id="banner">
+		<h1>发布职位</h1>
+	</div>
+	<div class="feedback-results-container modify"
+		th:if="${session.recruiter.yesorno=='no'}">
+		<div class="feedback-results-title">
+			平台审核拒绝原因：
+			<div class="feedback-results-content">
+				<i class="icon-glyph-attention2"></i> 个人信息有误（姓名、公司、职位等信息与证明照上的信息不一致）
+			</div>
+			<div class="feedback-results-content">
+				<i class="icon-glyph-attention2"></i>
+				请上传本人正确手持身份证照片（身份证信息需清晰完整，请勿遮挡）
+			</div>
+			<div class="feedback-results-content">
+				<i class="icon-glyph-attention2"></i> 营业执照不清晰（有模糊、涂改、变形、截断、PS等情况）
+			</div>
+		</div>
+	</div>
+	<div class="feedback-results-container modify"
+		th:if="${session.recruiter.yesorno==null&&session.recruiter.uptime!=null}">
+		<div class="feedback-results-title">
+			<div class="feedback-results-content">正在审核中，请耐心等待...</div>
+		</div>
+	</div>
+	<div class="feedback-results-container modify"
+		th:if="${session.recruiter.yesorno==null&&session.recruiter.uptime==null}">
+		<div class="feedback-results-title">
+			<div class="feedback-results-content">
+				<a href="/recruiter/IdentityLoad">完成身份认证后，即可发布职位！</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="container" th:if="${session.recruiter.yesorno=='yes'}">
+		<div class="content_l">
+			<div class="recommend_list">
+				<ul class="rec_pos" th:each="job,userStat : ${session.jobslist}">
+					<li class="rec_pos_item clearfix" data-jobid="3293236"
+						data-company="128998">
+						<div class="rec_pos_l">
+							<div class="row" id="position_name">
+								<a  href="" data-arg="rec"
+									data-index="0"  data-lg-tj-id="gq00"
+									data-lg-tj-no="0101" data-lg-tj-cid="3293236"
+									data-lg-tj-abt="cf_interest|1"><em
+									class="posName wordCut fl" th:text="${job.getName()}"></em>
+									<span class="posAdd" th:text="'['+${job.getCity()}+']'"></span></a>
+								<span class="posDate c9" th:text="${job.getUptime()}+'发布'"></span>
+							</div>
+							<div class="row">
+								<span class="salary" th:text="${job.getSalary()}"></span>
+								<span class="c5" th:text="'经验'+${job.getExperience()}+'/'+${job.getEducation()}+'/'+${job.getNature()}"></span>
+							</div>
+						</div>
+						<div class="rec_pos_r">
+							<div class="coLeft">
+								<div class="row">
+								<form action="/recruiter/PostChangeJob">
+									<input name="id" type="hidden" th:value="${job.getId()}">
+									<a class="coName wordCut"
+										href="" target="_blank"><input type="submit" value="查看所有信息" class="submit"></a>
+								</form>
+								</div>
+							</div>
+						</div>
+						<div class="rec_pos_b"> <ul class="tags"> </ul> <div class="posAdvBox"> </div> </div>
+					</li>		
+				</ul>
+			</div>
+		</div>
+		<div class="content_r">
+			<div class="subscribe">
+			<form action="/recruiter/PostJob">
+				<a class="coName wordCut" title="点击发布新职位"
+					 href="" target="_blank"><input type="submit" value="点击发布新职位" class="submit"></a>
+			</form>
+			</div>        
+        </div>
+	</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>管理员</title>
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_5ab67db.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/mCustomScrollbar_ac2fb8b.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/layout_cb75ea0.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main_a6d7b89.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/widgets_edb8a0d.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_8e0f641.css">
+<link
+	href="/css/loginpop_4ea0500.css"
+	rel="stylesheet" class="lazyload">
+</head>
+<body>
+	<div id="lg_header">
+		<div id="lg_tbar">
+			<div class="inner">
+				<div class="lg_tbar_l">
+					<a rel="nofollow" class="lg_app" data-lg-tj-id="5500" data-lg-tj-no="idnull" data-lg-tj-cid="idnull" target="_blank">管理员</a> 
+				</div>
+				<ul class="lg_tbar_r">
+					<li><a href="/admin/Schoolmen/Load"
+						class="bl" data-lg-tj-id="5700" data-lg-tj-no="idnull"
+						data-lg-tj-cid="idnull" rel="nofollow"
+						data-lg-tj-track-code="index_resume">刷新界面</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="lg_tnav">
+
+			<div class="inner">
+				<div class="lg_tnav_l">
+					<a data-lg-tj-id="19xd"><span class="xz_text">管理员审核</span></a>
+				</div>
+				<ul class="lg_tnav_wrap">
+					<li><a href="/admin/Recruiters/Load" data-lg-tj-id="5j00" data-lg-tj-no="idnull"
+						data-lg-tj-cid="idnull" data-lg-tj-track-code="index_company">招聘者信息</a></li>
+					<li><a href="/admin/Schoolmen/Load"data-lg-tj-id="5i00"  class="current"
+						data-lg-tj-no="idnull" data-lg-tj-cid="idnull">学校统计人员信息</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="main_container">
+		<div id="container_left">
+			<div id="containerCompanyDetails">
+				<div class="posfilterlist_container item_container"
+					data-lg-tj-track-code="hpage_indexlist"
+					id="posfilterlist_container">
+					<div class="item_content">
+						<div class="item_con_list_container">
+							<div class="list-content">
+								<ul class="item_con_list" th:each="schoolman,userStat : ${session.schoolmenlist}">
+									<li class="con_list_item default_list">
+									<form action="/admin/Schoolman/Load">
+										<div class="item_title_date">
+											<input name="id" type="hidden" th:value="${schoolman.getId()}">
+											<a class="item_title position_link" th:text="'学校：'+${schoolman.getSchool()}"></a>						
+											<span class="item_salary" th:text="'统计人员：'+${schoolman.getName()}"></span>
+										</div>
+										<p class="item_detail">
+											<span class="item_desc" th:text="'职位：'+${schoolman.getIdentity()}"></span>
+											<span class="item_date" th:text="${schoolman.getUptime()}+'上传申请'"></span>
+										</p>
+										<div class="item_container" id="basic_container">
+											<div class="item_content">
+										<div class="submit-button-div">	 
+											<a class="btn goto-check"><input type="submit" value="查看所有信息" class="submit"></a>
+										</div>
+											</div>
+										</div>		
+										</form>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

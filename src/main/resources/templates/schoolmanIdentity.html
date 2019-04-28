@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="baidu-site-verification" content="QIQ6KC1oZ6">
+<title>找工作-互联网招聘求职网</title>
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2830e9c.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/layout_1be28a1.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/widgets_72b87ec.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_5ab67db.css">
+
+<body>
+<div class="settings-header-title">招聘设置</div>
+		<ul class="settings-header-tab">
+			<li><a href="/schoolman/PersonalInformationLoad">个人信息</a></li>
+			<li><a href="/schoolman/IdentityLoad">身份认证</a></li>
+			<li><a href="">毕业生就业状况</a></li>
+		</ul>
+	<div id="banner">
+		<h1>身份验证，开始查询</h1>
+	</div>
+	<div class="container">
+		<div class="feedback-results-container modify">
+			<div class="feedback-results-title" th:if="${session.schoolman.yesorno=='no'}">
+				平台审核拒绝原因：
+				<div class="feedback-results-content">
+					<i class="icon-glyph-attention2"></i> 个人信息有误（姓名、学校、职位与证明照上的信息不一致）
+				</div>
+				<div class="feedback-results-content">
+					<i class="icon-glyph-attention2"></i>
+					请上传本人正确手持身份证照片（身份证信息需清晰完整，请勿遮挡）
+				</div>
+				<div class="feedback-results-content">
+					<i class="icon-glyph-attention2"></i> 工作证件照不清晰（有模糊、涂改、变形、截断、PS等情况）
+				</div>
+			</div>
+			<div class="feedback-results-title" th:if="${session.schoolman.yesorno=='yes'}">
+			<div class="feedback-results-content"> 您已通过身份审核，可以查看本学校毕业生信息！ </div>
+			</div>
+		</div>
+		<div class="infos-container with-bg">
+			<ul class="infos">
+				<li class="li"><span class="info-list">姓名</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.schoolman.getName()}"></span></li>
+				<li class="li"><span class="info-list">学校</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.schoolman.getSchool()}"></span></li>
+				<li class="li"><span class="info-list">职位</span> <span
+					class="info-content has-change-company"><input type="text"
+						readonly="readonly"
+						th:value="${session.schoolman.getIdentity()}"></span> <span
+					class="change-company"> 个人信息有误？ <a
+						href="/schoolman/PersonalInformationLoad"> 更改个人信息 </a></span></li>
+			</ul>
+		</div>
+		<form id="businessLicence" action="/schoolman/Identity"
+			enctype="multipart/form-data" autocomplete="off"
+			class="email-check-hide" method="post">
+			<div class="user-input-container">
+				<ul class="check-content">
+					<li class="file-upload-section"><label class="label">
+							职位证明照 </label>
+						<div class="file-upload-title">
+							<span class="please-upload">请上传</span> <span class="show-example">示例</span>
+						</div>
+						<div class="file-upload-div uploaded">
+							<div class="file-pic">
+								<span class="file-pic-hover">点击更换图片</span>
+								<div id="prvid">
+									<img alt="头像" class="file-uploaded-img" width="120" 
+										height="120"
+										th:if="${session.schoolman.getJobp()!=null}"
+										th:src="${session.schoolman.getJobp()}">
+								</div>
+							</div>
+							<a><i class="delete-img icon-glyph-close3"></i></a>
+						</div>
+						<div>
+							<input type="file" name="jobp" class="logo_file" required="required" th:if="${session.schoolman.getYesorno()!='yes'}"
+								onchange="previewImage(this, 'prvid')" multiple="multiple">
+						</div>
+						<div class="file-upload-tip">
+							<p class="upload-tip-title important-content">上传职位证明照须知：</p>
+							<p class="upload-tip-content important-content">职位证明照清晰完善，不能剪裁</p>
+							<p class="upload-tip-content important-content">不支持手机屏幕截图和电脑翻拍图片</p>
+							<p class="upload-tip-content important-content">职位证明照的黑白复印件、扫描件，需加盖红色学校公章</p>
+							<p class="upload-tip-content important-content">职位证明照二维码能识别出学校信息</p>
+							<p class="upload-tip-content">如职位已变更，请上传最新职位证明照</p>
+							<p class="upload-tip-content">职位证明照与学校全称一致</p>
+							<p class="upload-tip-content">如添加水印须与拉勾网招聘审核相关</p>
+						</div>
+						<div class="file-img-tip">
+							<img width="154" height="220"
+								src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548676177803&di=7852d7e92b24c1ebaf978985c178cf24&imgtype=0&src=http%3A%2F%2Fthumb.1010pic.com%2Fpic10%2Ft%2Fa%2F240790_1.jpg	"
+								class="example-img">
+						</div>
+						</li>
+					<li class="file-upload-section"><label class="label">
+							手持身份证 </label>
+						<div class="file-upload-title">
+							<span class="please-upload">请上传</span> <span class="show-example">示例</span>
+						</div>
+						<div class="file-upload-div uploaded">
+							<div class="file-pic" id="prvi">
+								<span class="file-pic-hover">点击更换图片</span> <img alt="头像"
+									class="file-uploaded-img" width="120" height="120"
+									th:if="${session.schoolman.getIdcardp()!=null}"
+									th:src="${session.schoolman.getIdcardp()}">
+							</div>
+							<a><i class="delete-img icon-glyph-close3">上传图片</i></a>
+						</div>
+						<div class="file-upload-tip">
+							<p class="upload-tip-title important-content">上传手持身份证须知：</p>
+							<p class="upload-tip-content">
+								身份证<span class="important-content">原件信息、正脸</span>在照片内均<span
+									class="important-content">可清晰识别</span>
+							</p>
+							<p class="upload-tip-content">身份证原件信息完整展示、请勿遮挡、PS</p>
+							<p class="upload-tip-content">不支持手机屏幕截图和电脑翻拍图片</p>
+							<p class="upload-tip-content">如需添加水印，需与拉勾网招聘审核相关</p>
+							<p class="upload-tip-content open-alipay-qrcode">
+								身份证不在身份？ <a class="a"> 切换支付宝人脸识别 </a>
+							</p>
+						</div>
+						<div class="file-img-tip">
+							<img width="154" height="220"
+								src="//www.lgstatic.com/hr/static/service/modules/common/img/join-company-identity-verification/identify-card-example@2x_167b46b.png"
+								class="example-img">
+							<div class="pic-img-tips">对焦在身份证上，保证内容完整清晰</div>
+						</div>
+						<div>
+							<input type="file" name="idcardp" class="logo_file" onchange="previewImage(this, 'prvi')" multiple="multiple" required="required" th:if="${session.schoolman.getYesorno()!='yes'}">
+						</div>
+						<div class="submit-button-div">	 
+							<a class="btn goto-check" th:if="${session.schoolman.getYesorno()!='yes'}"><input type="submit" value="上传证明照片" class="submit"></a>
+						</div>
+				</ul>
+			</div>
+		</form>
+	</div>
+	<script>	　
+	function previewImage(file, prvid) { 
+		/* file：file控件 
+		* prvid: 图片预览容器 
+		*/ 
+		var tip = "Expect jpg or png or gif!"; // 设定提示信息 
+		var filters = { 
+		"jpeg" : "/9j/4", 
+		"gif" : "R0lGOD", 
+		"png" : "iVBORw" 
+		} 
+		var prvbox = document.getElementById(prvid); 
+		prvbox.innerHTML = ""; 
+		if (window.FileReader) { // html5方案 
+		for (var i=0, f; f = file.files[i]; i++) { 
+		var fr = new FileReader(); 
+		fr.onload = function(e) { 
+		var src = e.target.result; 
+		if (!validateImg(src)) { 
+		alert(tip) 
+		} else { 
+		showPrvImg(src); 
+		} 
+		} 
+		fr.readAsDataURL(f); 
+		} 
+		} else { // 降级处理
+
+		if ( !/\.jpg$|\.png$|\.gif$/i.test(file.value) ) { 
+		alert(tip); 
+		} else { 
+		showPrvImg(file.value); 
+		} 
+		} 
+
+		function validateImg(data) { 
+		var pos = data.indexOf(",") + 1; 
+		for (var e in filters) { 
+		if (data.indexOf(filters[e]) === pos) { 
+		return e; 
+		} 
+		} 
+		return null; 
+		} 
+
+		function showPrvImg(src) { 
+		var img = document.createElement("img"); 
+		img.alt='头像';
+		img.className = 'file-uploaded-img';
+		img.width="120";
+		img.height="120";
+		img.src = src; 
+		prvbox.appendChild(img); 
+		} 
+		}
+	</script>
+</body>
+</html>

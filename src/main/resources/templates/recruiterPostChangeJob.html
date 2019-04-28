@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="baidu-site-verification" content="QIQ6KC1oZ6">
+<title>找工作-互联网招聘求职网</title>
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2830e9c.css">
+<link rel="stylesheet" type="text/css" href="/css/layout_1be28a1.css">
+<link rel="stylesheet" type="text/css" href="/css/widgets_72b87ec.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_5ab67db.css">
+<body>
+	<div id="banner">
+		<h1>更改职位</h1>
+	</div>
+	<div class="container">
+		<form id="businessLicence" action="/recruiter/ChangeTheJob"
+			enctype="multipart/form-data" autocomplete="off"
+			class="email-check-hide" method="post">
+			<div class="infos-container with-bg">
+				<ul class="infos">
+					<li class="li"><span class="info-list">岗位名称：</span> <span
+						class="info-content"><input type="text" name="name"
+							th:value="${session.job.getName()}"></span></li>
+					<li class="li"><span class="info-list">工作经验：</span> <span
+						class="info-content"><input type="text" name="experience"
+							th:value="${session.job.getExperience()}"></span></li>
+					<li class="li"><span class="info-list">学历：</span> <span
+						class="info-content"><input type="text" name="education"
+							th:value="${session.job.getEducation()}"></span></li>
+					<li class="li"><span class="info-list">工作性质：</span> <span
+						class="info-content"><input type="text" name="nature"
+							th:value="${session.job.getNature()}"></span></li>
+					<li class="li"><label class="info-list">薪资待遇：</label> <span
+						class="info-content"><input type="text" name="salary"
+							th:value="${session.job.getSalary()}"></span></li>
+					<li class="li"><span class="info-list">城市：</span> <span
+						class="info-content"><input type="text" name="city"
+							th:value="${session.job.getCity()}"></span></li>
+					<li class="li"><span class="info-list">地址：</span> <span
+						class="info-content"><input type="text" name="address"
+							th:value="${session.job.getAddress()}"></span></li>
+					<li class="li"><span class="info-list">岗位描述：</span> <span
+						class="info-content"><input name="recruiterId"
+							type="hidden" th:value="${session.recruiter.getId()}"></span></li>
+
+				</ul>
+
+			</div>
+
+			<div class="user-input-container">
+				<ul class="check-content">
+					<li class="file-upload-section"><label class="label"></label>
+						<textarea rows="3" cols="20"
+							th:text="${session.job.getDescribes()}" name="describes"></textarea>
+						<div class="submit-button-div">
+							<a class="btn goto-check"><input type="submit" value="确认更改"
+								class="submit"></a>
+						</div>
+				</ul>
+			</div>
+		</form>
+		<form action="/recruiter/DeleteTheJob">
+		<div class="user-input-container">
+				<ul class="check-content">
+					<li class="file-upload-section"><label class="label"></label>
+						<div class="submit-button-div">
+							 <a class="btn goto-check"><input
+								type="submit" value="删除职位" class="submit"></a>
+						</div>
+						<input name="id"
+							type="hidden" th:value="${session.job.getId()}">
+				</ul>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

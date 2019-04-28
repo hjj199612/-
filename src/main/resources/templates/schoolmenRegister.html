@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<title>学校统计人员注册计</title>
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_8c43af6.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/layout_1be28a1.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/pkg/widgets_72b87ec.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_997be1c.css">
+	<link href="/css/app.e5bf2f24d9fe1c057e47e65cc4fe6caf.css" rel="stylesheet">
+</head>
+<body>
+	<div id="banner">
+		<h1>统计人员身份注册</h1>
+	</div>
+	<div id="app">
+		<div id="appMainContent">
+			<div id="step">
+				<div id="step_1" class="step_num"><span class="required">账号注册</span></div>
+			
+			</div>
+			<form id="personalInfo" action="/schoolman/Register" autocomplete="off"
+				class="content_container no_label" method="post" enctype="multipart/form-data">
+				<table class="table-layout">
+					<tbody>
+						<tr>
+							<td class="title"><span class="required">头像</span></td>
+							<td><p class="top" id="prvid">
+									<img  alt="头像" class="avatar" width="120" height="120" src="/userFile/schoolmen/def.png">					
+								</p> 
+								<div><span class="tips">建议使用招聘者真实头像提升真实性、专业性 <br>支持jpg、png的格式，小于10MB</span></div>
+								<input type="file" name="headpic" class="img-box" onchange="previewImage(this, 'prvid')"
+								 multiple="multiple">
+								 <td><span th:text="${message1}"></span><td>
+						</td>
+						</tr>
+						<tr>
+							<td class="title"><span class="required">用户名</span></td>
+							<td><input type="text" placeholder="注册用户名，不可更改" name="username" required="required" th:value="${session.username}">  </td>
+							<td><span th:text="${message2}"></span><td>
+						</tr>
+						<tr>
+							<td class="title"><span class="required">密码</span></td>
+							<td><div class="comp-wrap vue-input-suggest">
+									<input name="password1" placeholder="请填写当密码"   type="password" required="required">
+								</div></td><td><span th:text="${message3}"></span><td>
+						</tr>
+						<tr>
+							<td class="title"><span class="required">确认密码</span></td>
+							<td><input type="password" placeholder="请填写常用邮箱，支持招聘设置中修改" name="password2" required="required">
+							</td>
+							<td><span th:text="${message4}"></span><td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" value="下一步" class="submit">
+				<div class="preview">
+					<p class="top" id="headpicture">
+						<img  alt="头像" class="avatar" width="120" height="120" src="/userFile/schoolmen/def.png">				
+					</p>
+					<p class="bottom">
+						<span class="userName">头像</span>
+					</p>
+					<span class="tail"></span>
+					<br>毕业生:<a href="/graduatesRegister">注册</a>&nbsp;&nbsp;<a href="/graduatesLogin">登录</a>
+	<br>招聘者:<a href="/recruitersRegister">注册</a>&nbsp;&nbsp;<a href="/recruitersLogin">登录</a>
+	<br>学校统计人员:<a href="/schoolmenRegister">注册</a>&nbsp;&nbsp;<a href="/schoolmenLogin">登录</a>
+	<br>
+				</div>
+				
+			</form>
+
+		</div>
+	</div>
+	<script>
+		　
+		function previewImage(file, prvid) { 
+		/* file：file控件 
+		* prvid: 图片预览容器 
+		*/ 
+		var tip = "Expect jpg or png or gif!"; // 设定提示信息 
+		var filters = { 
+		"jpeg" : "/9j/4", 
+		"gif" : "R0lGOD", 
+		"png" : "iVBORw" 
+		} 
+		var prvbox = document.getElementById(prvid); 
+		var prvbox2 = document.getElementById("headpicture"); 
+		prvbox.innerHTML = ""; 
+		prvbox2.innerHTML = ""; 
+		if (window.FileReader) { // html5方案 
+		for (var i=0, f; f = file.files[i]; i++) { 
+		var fr = new FileReader(); 
+		fr.onload = function(e) { 
+		var src = e.target.result; 
+		if (!validateImg(src)) { 
+		alert(tip) 
+		} else { 
+		showPrvImg(src); 
+		} 
+		} 
+		fr.readAsDataURL(f); 
+		} 
+		} else { // 降级处理
+
+		if ( !/\.jpg$|\.png$|\.gif$/i.test(file.value) ) { 
+		alert(tip); 
+		} else { 
+		showPrvImg(file.value); 
+		} 
+		} 
+
+		function validateImg(data) { 
+		var pos = data.indexOf(",") + 1; 
+		for (var e in filters) { 
+		if (data.indexOf(filters[e]) === pos) { 
+		return e; 
+		} 
+		} 
+		return null; 
+		} 
+
+		function showPrvImg(src) { 
+		var img = document.createElement("img"); 
+		var img2 = document.createElement("img"); 
+		img.width="120";
+		img.height="120";
+		img.src = src; 
+		img2.src = src; 
+		prvbox.appendChild(img);
+		prvbox2.appendChild(img2);
+		} 
+		}
+		</script>
+</body>
+</html>

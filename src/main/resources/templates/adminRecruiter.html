@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="baidu-site-verification" content="QIQ6KC1oZ6">
+<title>找工作-互联网招聘求职网</title>
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2830e9c.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/pkg/layout_1be28a1.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/widgets_72b87ec.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_5ab67db.css">
+
+<body>
+	<div id="banner">
+		<h1>请审核信息</h1>
+	</div>
+	<div class="container">
+		<div class="infos-container with-bg">
+			<ul class="infos">
+				<li class="li"><span class="info-list">姓名</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getName()}"></span></li>
+				<li class="li"><span class="info-list">职位</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getPosition()}"></span></li>
+				<li class="li"><span class="info-list">部门</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getDepartment()}"></span></li>
+				<li class="li"><span class="info-list">手机</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getPhone()}"></span></li>
+				<li class="li"><span class="info-list">邮箱</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getMailbox()}"></span></li>
+				<li class="li"><label class="info-list">公司全称</label> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getCompanyname()}"></span></li>			
+				<li class="li"><label class="info-list">公司简称</label> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getCompanyshortname()}"></span></li>		
+				<li class="li"><span class="info-list">业务领域</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getCompanyfield()}"></span></li>
+				<li class="li"><span class="info-list">公司规模</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getCompanyscale()}"></span></li>
+				<li class="li"><span class="info-list">发展阶段</span> <span
+					class="info-content"><input type="text" readonly="readonly"
+						th:value="${session.recruiter.getCompanydevelop()}"></span></li>											
+			</ul>
+		</div>
+			<div class="user-input-container">
+				<ul class="check-content">
+					<li class="file-upload-section"><label class="label">
+							身份认证 </label>
+						<div class="file-upload-title">
+							<span class="please-upload">个人身份证照</span> <span class="show-example">公司营业执照</span>
+						</div>
+						<div class="file-upload-div uploaded">
+							<img width="154" height="220"
+								th:src="${session.recruiter.getIdentitypicture()}" class="example-img">
+						</div>
+					
+						<div class="file-img-tip">
+							<img width="154" height="220"
+								th:src="${session.recruiter.getCompanypicture()}" class="example-img">
+						</div>
+						</li>
+				</ul>
+				<form action="/admin/Recruiter/ToExamine">
+					<div class="submit-button-div">	 <label><input name="yesorno" type="radio"
+					value="yes" />审核通过</label> <label><input name="yesorno"
+					type="radio" value="no" />审核未通过</label>	
+						<a class="btn goto-check"><input type="submit" value="确定" class="submit"></a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

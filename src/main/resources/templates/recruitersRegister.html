@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<title>招聘者注册</title>
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_8c43af6.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/layout_1be28a1.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/widgets_72b87ec.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_997be1c.css">
+	<link href="/css/app.e5bf2f24d9fe1c057e47e65cc4fe6caf.css" rel="stylesheet">
+</head>
+<body>
+	<div id="banner">
+		<h1>招聘者身份注册</h1>
+	</div>
+	<div id="app">
+		<div id="appMainContent">
+			<div id="step">
+				<div id="step_1" class="step_num"><span class="required">账号注册</span></div>
+			</div>
+			<form id="personalInfo" action="/recruiter/register" autocomplete="off" class="content_container no_label">
+				<table class="table-layout">
+					<tbody>
+						<tr>
+							<td class="title"><span class="required">用户名</span></td>
+							<td><input type="text" placeholder="注册用户名，不可更改" name="username" required="required" th:value="${session.username}">  </td>
+							<td><span th:text="${message1}"></span><td>
+						</tr>
+						<tr>
+							<td class="title"><span class="required">密码</span></td>
+							<td><div class="comp-wrap vue-input-suggest">
+									<input name="password1" placeholder="请填写当密码"   type="password" required="required">
+								</div></td><td><span th:text="${message2}"></span><td>
+						</tr>
+						<tr>
+							<td class="title"><span class="required">确认密码</span></td>
+							<td><input type="password" placeholder="请填写常用邮箱，支持招聘设置中修改" name="password2" required="required">
+							</td>
+							<td><span th:text="${message3}"></span><td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" value="下一步" class="submit">
+			</form>
+		</div>
+		<br>毕业生:<a href="/graduatesRegister">注册</a>&nbsp;&nbsp;<a href="/graduatesLogin">登录</a>
+	<br>招聘者:<a href="/recruitersRegister">注册</a>&nbsp;&nbsp;<a href="/recruitersLogin">登录</a>
+	<br>学校统计人员:<a href="/schoolmenRegister">注册</a>&nbsp;&nbsp;<a href="/schoolmenLogin">登录</a>
+	<br>
+	</div>
+</body>
+</html>
