@@ -12,7 +12,47 @@
 <link rel="stylesheet" type="text/css" href="/css/widgets_72b87ec.css">
 <link rel="stylesheet" type="text/css"
 	href="/css/main.html_aio_2_5ab67db.css">
+<link href="/css/main_16f99127.css"
+	rel="stylesheet">
 <body>
+<div id="lg_tbar">
+			<div class="inner">
+				<ul class="lg_tbar_r">
+				<li class="msg_dropdown" data-lg-tj-track-code="index_message">
+						<a class="msg_group" href="/recruiter/ApplyLoad"
+						data-lg-tj-id="5h00" data-lg-tj-no="idnull"
+						data-lg-tj-cid="idnull" rel="nofollow">投递箱<em
+							class="msg_amount hide" id="headMsgAmount"></em></a> 
+					</li>
+					<li class="user_dropdown" data-lg-tj-track-code="index_user"><span 
+						class="unick bl" th:if="${session.recruiter.getName()==null}"
+						th:text="${session.recruiter.getUsername()}+',快去完个人信息吧!'"></span> <span
+						th:if="${session.recruiter.getName()!=null}" class="unick bl"
+						th:text="${session.recruiter.getName()}+'你好！'"></span> <em
+						class="noticeDot dn" id="noticeDot_name"></em> <i></i>
+						<ul>
+							<li><a href="/recruiter/PersonalInformationLoad" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull">更改信息</a></li>
+							<li><a href="/recruiter/UpdatePassword" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">更改密码</a></li>
+							<li><a href="/recruitersLogin" data-lg-tj-id="5e00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">退出登录</a>
+							</li>
+						</ul></li>	
+				</ul>
+			</div>
+		</div>
+	<div class="settings-header">
+		<div class="settings-header-title">招聘设置</div>
+		<ul class="settings-header-tab">
+			<li><a href="/recruiter/PersonalInformationLoad"><span
+					class="menu-item">个人信息</span></a><span class="divider"></span></li>
+			<li><a href="/recruiter/IdentityLoad"><span
+					class="menu-item">身份认证</span></a><span class="divider"></span></li>
+			<li><a href="/recruiter/PostLoad"><span
+					class="menu-item menu-item-active">发布职位</span></a><span class="divider"></span></li>
+		</ul>
+	</div>
 	<div id="banner">
 		<h1>更改职位</h1>
 	</div>
@@ -54,11 +94,11 @@
 			<div class="user-input-container">
 				<ul class="check-content">
 					<li class="file-upload-section"><label class="label"></label>
-						<textarea rows="3" cols="20"
+						<textarea rows="33" cols="203"
 							th:text="${session.job.getDescribes()}" name="describes"></textarea>
 						<div class="submit-button-div">
-							<a class="btn goto-check"><input type="submit" value="确认更改"
-								class="submit"></a>
+							<input type="submit" value="确认更改"
+								class="submit">
 						</div>
 				</ul>
 			</div>
@@ -68,8 +108,8 @@
 				<ul class="check-content">
 					<li class="file-upload-section"><label class="label"></label>
 						<div class="submit-button-div">
-							 <a class="btn goto-check"><input
-								type="submit" value="删除职位" class="submit"></a>
+							<input
+								type="submit" value="删除职位" class="submit"> 	
 						</div>
 						<input name="id"
 							type="hidden" th:value="${session.job.getId()}">

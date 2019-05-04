@@ -61,37 +61,19 @@
 				</ul>
 			</div>
 		</div>
-		<div id="lg_tnav">
-			<div class="inner">
-				<ul class="lg_tnav_wrap">
-					<li><a href="/graduate/LoadJobs" data-lg-tj-id="5i00" data-lg-tj-no="idnull"
-						data-lg-tj-cid="idnull"><font color="#00ff00">首页</font></a></li>
-					<li><a href="" data-lg-tj-id="5j00" data-lg-tj-no="idnull" 
-						data-lg-tj-cid="idnull" data-lg-tj-track-code="index_company">公司</a>
-					</li>
-				</ul>
-			</div>
-		</div>
 	</div>
 	<div id="content-container">
 		<div class="search-wrapper  ">
 			<div id="searchBar" class="search-bar">
-				<div class="input-wrapper" data-lg-tj-track-code="search_search" data-lg-tj-track-type="1">
-				<form id="personalInfo" action="/graduate/QueryJobs">
-					<div class="keyword-wrapper">
-						<input type="text" autocomplete="off"  style="width:800px;height:50px;"
-							placeholder="搜索职位或地点"  class="ui-autocomplete-input" name="inform" required="required">
-					</div>
-					<a class="coName wordCut" target="_blank"><input type="submit" value="职位搜索" class="submit"></a>
-				</form>
-				</div>
+				<h2>我的投递</h2>
+				<h3 class="rec_pos" th:if="${session.joblist.isEmpty()==true}"><font color="#ff0000">还未投递职位，快去投递职位吧！</font></h3>
 			</div>
 		</div>
 	</div>
 	<div id="container">
 	<div class="content_l">
 			<div class="recommend_list">
-				<ul class="rec_pos" th:each="job,userStat : ${session.joblist}">
+				<ul class="rec_pos" th:each="apply,userStat : ${session.applylist}">
 					<li class="rec_pos_item clearfix" data-jobid="3293236"
 						data-company="128998">
 						<div class="rec_pos_l">
@@ -100,20 +82,21 @@
 									data-index="0"  data-lg-tj-id="gq00"
 									data-lg-tj-no="0101" data-lg-tj-cid="3293236"
 									data-lg-tj-abt="cf_interest|1"><em
-									class="posName wordCut fl" th:text="${job.getName()}"></em>
-									<span class="posAdd" th:text="'['+${job.getCity()}+']'"></span></a>
-								<span class="posDate c9" th:text="${job.getUptime()}+'发布'"></span>
+									class="posName wordCut fl" th:text="${apply.getJob().getName()}"></em>
+									<span class="posAdd" th:text="'['+${apply.getJob().getCity()}+']'"></span></a>
+								<span class="posDate c9" th:text="${apply.getUptime()}+'申请'"></span>
 							</div>
 							<div class="row">
-								<span class="salary" th:text="${job.getSalary()}"></span>
-								<span class="c5" th:text="'经验'+${job.getExperience()}+'/'+${job.getEducation()}+'/'+${job.getNature()}"></span>
+								<span class="salary" th:text="${apply.getJob().getSalary()}"></span>
+								<span class="c5" th:text="'经验'+${apply.getJob().getExperience()}+'/'+${apply.getJob().getEducation()}+'/'+${apply.getJob().getNature()}"></span>
+								<span class="salary" th:if="${apply.getRefuse()=='no'}">对方觉得您不适合该职位,已拒绝您的申请</span>
 							</div>
 						</div>
 						<div class="rec_pos_r">
 							<div class="coLeft">
 								<div class="row">
 								<form action="/graduate/CheckJob">
-									<input name="id" type="hidden" th:value="${job.getId()}">
+									<input name="id" type="hidden" th:value="${apply.getJob().getId()}">
 									<a class="coName wordCut"
 										href="" target="_blank"><input type="submit" value="查看所有信息" class="submit"></a>
 								</form>

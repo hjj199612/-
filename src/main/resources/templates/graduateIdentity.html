@@ -1,0 +1,330 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>毕业生求职</title>
+<link href="/css/main_16f99127.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_757e2eb.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_6d1830a.css">
+<link rel="stylesheet" type="text/css" href="/css/layout_1be28a1.css">
+<link rel="stylesheet" type="text/css" href="/css/widgets_72b87ec.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_95d2830.css">
+<link href="/css/loginpop_f44cefd.css" rel="stylesheet" class="lazyload">
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/layout_cb75ea0.css">
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/widgets_edb8a0d.css">
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/search-result/page/index/main.html_aio_2_3d3f26c.css">
+
+</head>
+<body>
+	<div id="lg_header">
+		<div id="lg_tbar">
+			<div class="inner">
+				<ul class="lg_tbar_r">
+					<li class="msg_dropdown" data-lg-tj-track-code="index_message">
+						<a class="msg_group" href="/graduate/LoadJobs"
+						data-lg-tj-id="5h00" data-lg-tj-no="idnull"
+						data-lg-tj-cid="idnull" rel="nofollow">寻找职位<em
+							class="msg_amount hide" id="headMsgAmount"></em></a> 
+					</li>
+					<li><a href="/graduate/ResumeLoad" class="bl" data-lg-tj-id="5700"
+						data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow"
+						data-lg-tj-track-code="index_resume">我的简历</a></li>
+					<li><a href="/graduate/Apply" class="bl" id="deliveryLink"
+						data-lg-tj-id="5800" data-lg-tj-no="idnull"
+						data-lg-tj-cid="idnull" rel="nofollow"
+						data-lg-tj-track-code="index_deliver" data-lg-tj-track-type="1">投递箱</a>
+						<em class="noticeDot dn" id="noticeDot_delivery"></em></li>
+
+					<li class="user_dropdown" data-lg-tj-track-code="index_user"><span
+						class="unick bl" th:if="${session.graduate.getName()==null}"
+						th:text="${session.graduate.getUsername()}+',快去完个人信息吧!'"></span> <span
+						th:if="${session.graduate.getName()!=null}" class="unick bl"
+						th:text="${session.graduate.getName()}+'你好！'"></span> <em
+						class="noticeDot dn" id="noticeDot_name"></em> <i></i>
+						<ul>
+							<li><a href="/graduate/IdentityLoad" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull">更改信息</a></li>
+							<li><a href="/graduate/UpdatePassword" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">更改密码</a></li>
+							<li><a href="/graduatesLogin" data-lg-tj-id="5e00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">退出登录</a>
+							</li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div>
+		<form class="account-form form" action="/graduate/IdentitySave"
+			method="post" enctype="multipart/form-data">
+			<div class="form-item">
+				<div class="form-item-label">
+					<label class="">头像</label>
+				</div>
+				<div class="form-item-control ">
+					<div class="avatar-area fl" id="prvid">
+						<img alt="头像" class="avatar"
+							th:if="${session.graduate.getHeadpic()!=null}"
+							th:src="${session.graduate.getHeadpic()}">
+					</div>
+
+					<div class="upload-img-des fl">
+						<p>支持jpg、png图片文件</p>
+						<p>图片尺寸：120px*120px</p>
+						<p>图片大小需小于10MB</p>
+
+					</div>
+					<input type="file" id="files" name="headpic"
+						onchange="previewImage(this, 'prvid')" multiple="multiple">
+					<div class="input-tips hrName">
+						<span><font th:text="${message1}" color="ff0000"></font></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-item form-item-tips info-name dot">
+				<div class="form-item-label">
+					<label for="name" class="">姓名</label>
+				</div>
+				<div class="form-item-control success">
+					<div class="input-wrapper">
+						<input type="text" placeholder="请填写你的常用名" name="name"
+							th:value="${session.graduate.getName()}" required="required"
+							data-meta="[object Object]" class="input">
+					</div>
+
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-title dot">
+				<div class="form-item-label">
+					<label for="hrName4JD" class="">性别</label>
+				</div>
+				<div class="form-item-control success">
+					<label><input name="sex" type="radio" value="男"
+						required="required" />男</label> <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<label><input name="sex" type="radio" value="女"
+						required="required" />女</label>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-job">
+				<div class="form-item-label">
+					<label for="title" class="">生日</label>
+				</div>
+				<div class="form-item-control success">
+					<div class="input-wrapper">
+						<input type="date" placeholder="请填写你的生日" name="birth"
+							th:value="${session.graduate.getBirth()}"
+							data-meta="[object Object]" class="input" required="required">
+					</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-department">
+				<div class="form-item-label">
+					<label for="department" class="">学校</label>
+				</div>
+				<div class="form-item-control ">
+					<div class="input-wrapper">
+						<input type="text" placeholder="请填写你的学校" name="school"
+							th:value="${session.graduate.getSchool()}"
+							data-meta="[object Object]" class="input" required="required">
+					</div>
+					<div class="input-tips hrName">
+						<span><font th:text="${message2}" color="ff0000"></font></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-department">
+				<div class="form-item-label">
+					<label for="department" class="">学院</label>
+				</div>
+				<div class="form-item-control ">
+					<div class="input-wrapper">
+						<input type="text" placeholder="请填写你的学院" name="college"
+							th:value="${session.graduate.getCollege()}"
+							data-meta="[object Object]" class="input" required="required">
+					</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-department">
+				<div class="form-item-label">
+					<label for="department" class="">学历</label>
+				</div>
+				<div class="form-item-control ">
+					<div class="input-wrapper">
+						<input type="text" placeholder="请填写你的学历" name="education"
+							th:value="${session.graduate.getEducation()}"
+							data-meta="[object Object]" class="input" required="required">
+					</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-department">
+				<div class="form-item-label">
+					<label for="department" class="">专业</label>
+				</div>
+				<div class="form-item-control ">
+					<div class="input-wrapper">
+						<input type="text" placeholder="请填写你的专业" name="major"
+							th:value="${session.graduate.getMajor()}"
+							data-meta="[object Object]" class="input" required="required">
+					</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-department">
+				<div class="form-item-label">
+					<label for="department" class="">学号</label>
+				</div>
+				<div class="form-item-control ">
+					<div class="input-wrapper">
+						<input type="text" placeholder="请填写你的学号" name="studentid"
+							th:value="${session.graduate.getStudentid()}"
+							data-meta="[object Object]" class="input" required="required">
+					</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-email dot">
+				<div class="form-item-label">
+					<label for="email" class="form-item-required">期望工作</label>
+				</div>
+				<div class="form-item-control success">
+					<div class="input-wrapper">
+						<input type="text" placeholder="填写你期望的工作" name="expectedwork"
+							required="required"
+							th:value="${session.graduate.getExpectedwork()}"
+							data-meta="[object Object]" class="input">
+					</div>
+					<div class="input-tips phone-dis">*用于接收信息</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-phone dot">
+				<div class="form-item-label">
+					<label for="phone" class="form-item-required">手机</label>
+				</div>
+				<div class="form-item-control success">
+					<div class="input-wrapper">
+						<input type="text" placeholder="请填写你的手机号" name="phone"
+							required="required" th:value="${session.graduate.getPhone()}"
+							data-meta="[object Object]" class="input">
+					</div>
+					<div class="input-tips phone-dis">*用于接收招聘类通知短信</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-email dot">
+				<div class="form-item-label">
+					<label for="email" class="form-item-required">邮箱</label>
+				</div>
+				<div class="form-item-control success">
+					<div class="input-wrapper">
+						<input type="email" placeholder="该邮箱用于接收简历" name="email"
+							required="required" th:value="${session.graduate.getEmail()}"
+							data-meta="[object Object]" class="input">
+					</div>
+					<div class="input-tips phone-dis">*用于接收信息</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-email dot">
+				<div class="form-item-label">
+					<label for="email" class="form-item-required">就职状态</label>
+				</div>
+				<div class="form-item-control success">
+					<div class="input-wrapper">
+						<select name="state" required="required"
+							style="width: 200px; height: 40px;">
+							<option></option>
+							<option value="0">未就职</option>
+							<option value="1">已就职</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-department">
+				<div class="form-item-label">
+					<label for="department" class="">就职公司</label>
+				</div>
+				<div class="form-item-control ">
+					<div class="input-wrapper">
+						<input type="text" placeholder="请填写你就职的公司" name="company"
+							th:value="${session.graduate.getCompany()}"
+							data-meta="[object Object]" class="input" required="required">
+					</div>
+					<div class="input-tips phone-dis">*未就职填无</div>
+				</div>
+			</div>
+			<div class="form-item form-item-tips info-title dot">
+				<div class="form-item-label">
+					<label for="hrName4JD" class="">工作与专业相关</label>
+				</div>
+				<div class="form-item-control success">
+					<label><input name="majorrelevant" type="radio" value="1"
+						required="required" />是</label> <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<label><input name="majorrelevant" type="radio" value="0"
+						required="required"  />否</label>
+				</div>
+			</div>
+			<button class="btn btn btn-submit" type="submit">
+				<!-- react-text: 137 -->
+				保存
+				<!-- /react-text -->
+			</button>
+		</form>
+	</div>
+	<script>
+		function previewImage(file, prvid) {
+			/* file：file控件 
+			 * prvid: 图片预览容器 
+			 */
+			var tip = "Expect jpg or png or gif!"; // 设定提示信息 
+			var filters = {
+				"jpeg" : "/9j/4",
+				"gif" : "R0lGOD",
+				"png" : "iVBORw"
+			}
+			var prvbox = document.getElementById(prvid);
+			prvbox.innerHTML = "";
+			if (window.FileReader) { // html5方案 
+				for (var i = 0, f; f = file.files[i]; i++) {
+					var fr = new FileReader();
+					fr.onload = function(e) {
+						var src = e.target.result;
+						if (!validateImg(src)) {
+							alert(tip)
+						} else {
+							showPrvImg(src);
+						}
+					}
+					fr.readAsDataURL(f);
+				}
+			} else { // 降级处理
+
+				if (!/\.jpg$|\.png$|\.gif$/i.test(file.value)) {
+					alert(tip);
+				} else {
+					showPrvImg(file.value);
+				}
+			}
+
+			function validateImg(data) {
+				var pos = data.indexOf(",") + 1;
+				for ( var e in filters) {
+					if (data.indexOf(filters[e]) === pos) {
+						return e;
+					}
+				}
+				return null;
+			}
+
+			function showPrvImg(src) {
+				var img = document.createElement("img");
+				img.alt = '头像';
+				img.className = 'avatar';
+				img.src = src;
+				prvbox.appendChild(img);
+			}
+		}
+	</script>
+</body>
+</html>

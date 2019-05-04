@@ -72,16 +72,16 @@ public class AdminController {
 	public String adminLogin(String account, String password, Model m, HttpSession session) {
 		if (account.equals("")) {
 			m.addAttribute("message1", "请输入账号！");
-			return "administratorlogin.html";
+			return "adminLogin.html";
 		}
 		if (password.equals("")) {
 			m.addAttribute("message2", "请输入密码！");
-			return "administratorlogin.html";
+			return "adminLogin.html";
 		}
 		Admin admin = loginService.findAdmin(account, password);
 		if (admin == null) {
 			m.addAttribute("message2", "密码错误！");
-			return "administratorlogin.html";
+			return "adminLogin.html";
 		}
 		session.setAttribute("administrator", admin);
 		return "redirect:/admin/Recruiters/Load";

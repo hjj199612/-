@@ -3,17 +3,17 @@ package com.example.demo.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.multipart.MultipartFile;
+
+import com.example.demo.entity.Graduate;
 import com.example.demo.entity.Job;
 import com.example.demo.entity.Recruiter;
 import com.example.demo.service.ComplexSearchService;
@@ -33,6 +33,54 @@ public class RecruiterController2 {
 	ComplexSearchService complexSearchService;
 	final String  USER_TYPR="recruiters";
 	
+	@RequestMapping(value="/recruiter/Refuse",method = { RequestMethod.GET, RequestMethod.POST })//下载简历文件
+	public String recruiterRefuse(@SessionAttribute(value = "recruiter") Recruiter recruiter,
+			@SessionAttribute(value = "job") Job job,String graduateid,HttpSession session) {
+		registerService.refuseApplyByGraduateidAndJobid(Integer.valueOf(graduateid),job.getId());
+		ArrayList<Graduate> graduatelist=new ArrayList<Graduate>();
+		ArrayList<Integer> garaduateidList=complexSearchService.findAllByJobidAndRefuseIsNull(job.getId());
+		for(Integer i:garaduateidList) {
+			graduatelist.add(registerService.findAGraduateById(i));
+		}
+		session.setAttribute("recruiter", recruiter);
+		session.setAttribute("job", job);
+		session.setAttribute("graduatelist", graduatelist);
+		return "recruiterCheckApply.html";
+	}
+	
+	@RequestMapping(value="/recruiter/ResumeGet",method = { RequestMethod.GET, RequestMethod.POST })//下载简历文件
+	public String recruiterResumeGet(@SessionAttribute(value = "recruiter") Recruiter recruiter,@SessionAttribute(value = "graduatelist") ArrayList<Graduate> graduatelist,
+			String resume,String resumename,HttpSession session,HttpServletResponse response) throws ServletException, IOException {
+		filesaveService.getResume(resume,resumename, response);
+		session.setAttribute("recruiter", recruiter);
+		session.setAttribute("graduatelist", graduatelist);
+		return "recruiterCheckApply.html";
+	}
+	
+	@RequestMapping(value="/recruiter/CheckApply",method = { RequestMethod.GET, RequestMethod.POST }) // 删除职位
+	public String recruiterCheckApply(@SessionAttribute(value = "recruiter") Recruiter recruiter,String jobid,HttpSession session)  {
+		ArrayList<Graduate> graduatelist=new ArrayList<Graduate>();
+		ArrayList<Integer> garaduateidList=complexSearchService.findAllByJobidAndRefuseIsNull(Integer.valueOf(jobid));
+		for(Integer i:garaduateidList) {
+			graduatelist.add(registerService.findAGraduateById(i));
+		}
+		session.setAttribute("job", registerService.findAJobById(Integer.valueOf(jobid)));
+		session.setAttribute("graduatelist", graduatelist);
+		session.setAttribute("recruiter", recruiter);
+		return "recruiterCheckApply.html";
+	}
+	
+	@RequestMapping(value="/recruiter/ApplyLoad",method = { RequestMethod.GET, RequestMethod.POST }) // 删除职位
+	public String recruiterApplyLoad(@SessionAttribute(value = "recruiter") Recruiter recruiter,HttpSession session)  {
+		ArrayList<Job> joblist=new ArrayList<Job>();
+		ArrayList<Integer> jobidList=complexSearchService.findAllByRecruit(recruiter.getId());
+		for(Integer i:jobidList) {
+			joblist.add(registerService.findAJobById(i));
+		}
+		session.setAttribute("joblist", joblist);
+		session.setAttribute("recruiter", recruiter);
+		return "recruiterApplys.html";
+	}
 	
 	@RequestMapping(value="/recruiter/DeleteTheJob",method = { RequestMethod.GET, RequestMethod.POST }) // 删除职位
 	public String recruiterDeleteTheJob(@SessionAttribute(value = "recruiter") Recruiter recruiter,String id,HttpSession session)  {

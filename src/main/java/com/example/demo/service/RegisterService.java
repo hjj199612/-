@@ -3,11 +3,15 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.demo.dao.ApplyDao;
 import com.example.demo.dao.GraduateDao;
 import com.example.demo.dao.JobDao;
 import com.example.demo.dao.RecruiterDao;
 import com.example.demo.dao.SchoolDao;
 import com.example.demo.dao.SchoolmanDao;
+import com.example.demo.entity.Apply;
 import com.example.demo.entity.Graduate;
 import com.example.demo.entity.Job;
 import com.example.demo.entity.Recruiter;
@@ -26,7 +30,27 @@ public class RegisterService {
 	GraduateDao graduateDao;
 	@Autowired
 	JobDao jobDao;
+	@Autowired
+	ApplyDao applyDao;
 	
+	public void refuseApplyByGraduateidAndJobid(Integer graduateid, Integer jobid) {
+		Apply apply=applyDao.findApplyByGraduateidAndJobid(graduateid,jobid);
+		apply.setRefuse("no");
+		applyDao.save(apply);
+	}
+	
+	@Transactional
+	public void deleteApplyByGraduateidAndJobid(Integer graduateid,Integer jobid) {
+		applyDao.deleteByGraduateidAndJobid(graduateid,jobid);
+	}
+	
+	public Graduate findAGraduateById(Integer id) {
+		return graduateDao.findGraduateById(id);	
+	}
+	
+	public void saveApply(Apply apply) {//保存职位申请信息
+		applyDao.save(apply);	
+	}
 	
 	public void saveJob(Job job) {
 		jobDao.save(job);	
@@ -39,6 +63,10 @@ public class RegisterService {
 		return jobDao.findJobById(id);	
 	}
 
+	public Recruiter findRecruiterById(Integer id) {
+		return recruiterDao.findRecruiterById(id);	
+	}
+	
 	public ArrayList<Schoolman> findSchoolmen(String username) {
 		return schoolmanDao.findSchoolmenByUsername(username);	
 	}
@@ -71,4 +99,5 @@ public class RegisterService {
 			return true;
 		}
 	}
+
 }

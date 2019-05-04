@@ -3,14 +3,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_997be1c.css">
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/layout_cb75ea0.css">
 <link
 	href="/css/main_16f99127.css"
 	rel="stylesheet">
-
 <title>招聘者界面</title>
 </head>
 <body>
-	<br>招聘者界面
+<div id="lg_tbar">
+			<div class="inner">
+				<ul class="lg_tbar_r">
+				<li class="msg_dropdown" data-lg-tj-track-code="index_message">
+						<a class="msg_group" href="/recruiter/ApplyLoad"
+						data-lg-tj-id="5h00" data-lg-tj-no="idnull"
+						data-lg-tj-cid="idnull" rel="nofollow">投递箱<em
+							class="msg_amount hide" id="headMsgAmount"></em></a> 
+					</li>
+					<li class="user_dropdown" data-lg-tj-track-code="index_user"><span 
+						class="unick bl" th:if="${session.recruiter.getName()==null}"
+						th:text="${session.recruiter.getUsername()}+',快去完个人信息吧!'"></span> <span
+						th:if="${session.recruiter.getName()!=null}" class="unick bl"
+						th:text="${session.recruiter.getName()}+'你好！'"></span> <em
+						class="noticeDot dn" id="noticeDot_name"></em> <i></i>
+						<ul>
+							<li><a href="/recruiter/PersonalInformationLoad" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull">更改信息</a></li>
+							<li><a href="/recruiter/UpdatePassword" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">更改密码</a></li>
+							<li><a href="/recruitersLogin" data-lg-tj-id="5e00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">退出登录</a>
+							</li>
+						</ul></li>	
+				</ul>
+			</div>
+		</div>
 	<div class="settings-header">
 		<div class="settings-header-title">招聘设置</div>
 		<ul class="settings-header-tab">
@@ -21,6 +50,9 @@
 			<li><a href="/recruiter/PostLoad"><span class="menu-item">发布职位</span></a><span
 				class="divider"></span></li>
 		</ul>
+	</div>
+	<div id="banner">
+		<h1>填写个人信息</h1>
 	</div>
 	<div>
 		<form class="account-form form" action="/recruiter/updatePersonalInformation" method="post" enctype="multipart/form-data">

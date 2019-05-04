@@ -1,0 +1,143 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>招聘者招聘</title>
+<link href="/css/main_16f99127.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_757e2eb.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_6d1830a.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/layout_1be28a1.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/widgets_72b87ec.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_95d2830.css">
+<link
+	href="/css/loginpop_f44cefd.css"
+	rel="stylesheet" class="lazyload">	
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/layout_cb75ea0.css">
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/widgets_edb8a0d.css">
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/search-result/page/index/main.html_aio_2_3d3f26c.css">
+
+</head>
+<body>
+	<div id="lg_tbar">
+			<div class="inner">
+				<ul class="lg_tbar_r">
+				<li class="msg_dropdown" data-lg-tj-track-code="index_message">
+						<a class="msg_group" href="/recruiter/ApplyLoad"
+						data-lg-tj-id="5h00" data-lg-tj-no="idnull"
+						data-lg-tj-cid="idnull" rel="nofollow">投递箱<em
+							class="msg_amount hide" id="headMsgAmount"></em></a> 
+					</li>
+					<li class="user_dropdown" data-lg-tj-track-code="index_user"><span 
+						class="unick bl" th:if="${session.recruiter.getName()==null}"
+						th:text="${session.recruiter.getUsername()}+',快去完个人信息吧!'"></span> <span
+						th:if="${session.recruiter.getName()!=null}" class="unick bl"
+						th:text="${session.recruiter.getName()}+'你好！'"></span> <em
+						class="noticeDot dn" id="noticeDot_name"></em> <i></i>
+						<ul>
+							<li><a href="/recruiter/PersonalInformationLoad" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull">更改信息</a></li>
+							<li><a href="/recruiter/UpdatePassword" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">更改密码</a></li>
+							<li><a href="/recruitersLogin" data-lg-tj-id="5e00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">退出登录</a>
+							</li>
+						</ul></li>	
+				</ul>
+			</div>
+		</div>
+	<div class="settings-header">
+		<div class="settings-header-title">招聘设置</div>
+		<ul class="settings-header-tab">
+			<li><a href="/recruiter/PersonalInformationLoad"><span
+					class="menu-item">个人信息</span></a><span class="divider"></span></li>
+			<li><a href="/recruiter/IdentityLoad"><span
+					class="menu-item">身份认证</span></a><span class="divider"></span></li>
+			<li><a href="/recruiter/PostLoad"><span
+					class="menu-item menu-item-active">发布职位</span></a><span class="divider"></span></li>
+		</ul>
+	</div>
+	<div id="content-container">
+		<div class="search-wrapper  ">
+			<div id="searchBar" class="search-bar">
+				<h2>职位信息：</h2>
+			</div><div id="container">
+			<div class="content_l">
+			<div class="recommend_list">
+				<ul class="rec_pos">
+					<li class="rec_pos_item clearfix" data-jobid="3293236"
+						data-company="128998">
+			<div class="rec_pos_l">
+							<div class="row" id="position_name">
+								<a  data-arg="rec" data-index="0"  data-lg-tj-id="gq00"
+									data-lg-tj-no="0101" data-lg-tj-cid="3293236"
+									data-lg-tj-abt="cf_interest|1"><em
+									class="posName wordCut fl" th:text="${session.job.getName()}"></em>
+									<span class="posAdd" th:text="'['+${session.job.getCity()}+']'"></span></a>
+								<span class="posDate c9" th:text="${session.job.getUptime()}+'发布'"></span>
+							</div>
+							<div class="row">
+								<span class="salary" th:text="${session.job.getSalary()}"></span>
+								<span class="c5" th:text="'经验'+${session.job.getExperience()}+'/'+${session.job.getEducation()}+'/'+${session.job.getNature()}"></span>
+							</div>
+						</div></li></ul></div></div></div>
+		</div>
+	</div>
+	<div id="container">
+	<div class="content_l">
+			<div class="recommend_list">
+			<div id="searchBar" class="search-bar">
+				<h2>应聘者信息如下：</h2>
+			</div>
+				<ul class="rec_pos" th:each="graduate,userStat : ${session.graduatelist}">
+					<li class="rec_pos_item clearfix" data-jobid="3293236"
+						data-company="128998">
+						<div class="rec_pos_l">
+							<div class="row" id="position_name">
+								<a  href="" data-arg="rec"
+									data-index="0"  data-lg-tj-id="gq00"
+									data-lg-tj-no="0101" data-lg-tj-cid="3293236"
+									data-lg-tj-abt="cf_interest|1"><em
+									class="posName wordCut fl" th:text="${graduate.getName()}"></em>
+									<span class="posAdd" th:text="'['+${graduate.getSex()}+']'"></span></a>
+									<span class="posAdd" th:text="'['+${graduate.getBirth()}+']'"></span>
+								<span class="posDate c9" th:text="'手机：'+${graduate.getPhone()}+'，邮箱：'+${graduate.getEmail()}"></span>
+							
+							</div>
+							<div class="row">
+								<span class="c5" th:text="${graduate.getSchool()}+'/'+${graduate.getEducation()}+'/'+${graduate.getMajor()}"></span>
+								<span class="salary" th:text="'简历：'+${graduate.getResumename()}"></span>
+							</div>
+						</div>
+						<div class="rec_pos_r">
+							<div class="coLeft">
+								<div class="row">
+								<form action="/recruiter/ResumeGet" th:if="${graduate.getResume()!=null}">
+									<input name="resume" type="hidden" th:value="${graduate.getResume()}">
+									<input name="resumename" type="hidden" th:value="${graduate.getResumename()}">
+									<a class="coName wordCut"
+										href="" target="_blank"><input type="submit" value="下载简历" class="submit"></a>
+								</form>
+								<form action="/recruiter/Refuse">
+									<input name="graduateid" type="hidden" th:value="${graduate.getId()}">
+									<a class="coName wordCut"
+										href="" target="_blank"><input type="submit" value="拒绝" class="submit"></a>
+								</form>
+								</div>
+							</div>
+						</div>
+						<div class="rec_pos_b"> <ul class="tags"> </ul> <div class="posAdvBox"> </div> </div>
+					</li>		
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

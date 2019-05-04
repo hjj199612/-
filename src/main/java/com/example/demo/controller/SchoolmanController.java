@@ -148,10 +148,9 @@ public class SchoolmanController {
 		}
 		schoolman.setPassword(password1);
 		registerService.saveSchoolman(schoolman);
-		return "redirect:/schoolmenlogin";
+		return "redirect:/schoolmenLogin";
 	}
 	
-
 	@RequestMapping("/schoolman/Login")
 	public String schoolmanlogin(String username, String password, Model m, HttpSession session) {
 		session.setAttribute("username", username);
@@ -174,7 +173,7 @@ public class SchoolmanController {
 			return "schoolmenlogin.html";
 		}
 		session.setAttribute("schoolman", schoolman);
-		return "redirect:/schoolman/PersonalInformationLoad";
+		return "redirect:/schoolman/CheckGraduatesLoad";
 	}
 
 	@RequestMapping(value = "/schoolman/Register", method = { RequestMethod.GET, RequestMethod.POST })

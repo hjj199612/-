@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_5ab67db.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/mCustomScrollbar_ac2fb8b.css">
+<link rel="stylesheet" type="text/css" href="/css/layout_cb75ea0.css">
+<link rel="stylesheet" type="text/css" href="/css/main_a6d7b89.css">
+<link rel="stylesheet" type="text/css" href="/css/widgets_edb8a0d.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_8e0f641.css">
+<link href="/css/main_16f99127.css" rel="stylesheet">
+<link href="/css/main_16f99127.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_757e2eb.css">
+<style type="text/css">
+.table-c table{border-right:1px solid #303030;border-bottom:1px solid #303030} 
+.table-c table td{border-left:1px solid #303030;border-top:1px solid #303030} 
+		</style>
+<title>统计就业生信息</title>
+</head>
+<body>
+	<div id="lg_header">
+		<div id="lg_tbar">
+			<div class="inner">
+				<ul class="lg_tbar_r">
+					<li th:if="${session.schoolman.getSchool()!=null}"><span
+						class="unick bl" th:text="${session.schoolman.getSchool()}"></span></li>
+					<li>
+					<li><span class="unick bl"
+						th:if="${session.schoolman.getName()==null}"
+						th:text="${session.schoolman.getUsername()}"></span> <span
+						th:if="${session.schoolman.getName()!=null}" class="unick bl"
+						th:text="${session.schoolman.getName()}"></span> <em
+						class="noticeDot dn" id="noticeDot_delivery"></em></li>
+					<li class="user_dropdown" data-lg-tj-track-code="index_user"><span
+						class="unick bl" th:if="${session.schoolman.getName()==null}"
+						th:text="快去完个人信息吧！"></span> <span
+						th:if="${session.schoolman.getName()!=null}" class="unick bl"
+						th:text="你好！"></span> <em class="noticeDot dn" id="noticeDot_name"></em>
+						<i></i>
+						<ul>
+							<li><a href="/schoolman/PersonalInformationLoad"
+								data-lg-tj-id="5c00" data-lg-tj-no="idnull"
+								data-lg-tj-cid="idnull">更改信息</a></li>
+							<li><a href="/schoolman/UpdatePassword" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">更改密码</a></li>
+							<li><a href="/schoolmenLogin" data-lg-tj-id="5e00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">退出登录</a>
+							</li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	<div class="settings-header">
+		<div class="settings-header-title">毕业生就业状况</div>
+		<ul class="settings-header-tab">
+			<li><a href="/schoolman/PersonalInformationLoad"><span
+					class="menu-item">个人信息</span></a><span class="divider"></span></li>
+			<li><a href="/schoolman/IdentityLoad"><span
+					class="menu-item">身份认证</span></a><span class="divider"></span></li>
+			<li><a href="/schoolman/CheckGraduatesLoad"><span
+					class="menu-item menu-item-active">毕业生就业状况</span></a><span
+				class="divider"></span></li>
+		</ul>
+	</div>
+	<div id="banner">
+		<h1>开始查询就业信息</h1>
+	</div>
+	<div class="feedback-results-container modify"
+		th:if="${session.schoolman.yesorno=='no'}">
+		<div class="feedback-results-title">
+			平台审核拒绝原因：
+			<div class="feedback-results-content">
+				<i class="icon-glyph-attention2"></i> 个人信息有误（姓名、职位等信息与证明照上的信息不一致）
+			</div>
+			<div class="feedback-results-content">
+				<i class="icon-glyph-attention2"></i>
+				请上传本人正确手持身份证照片（身份证信息需清晰完整，请勿遮挡）
+			</div>
+			<div class="feedback-results-content">
+				<i class="icon-glyph-attention2"></i> 工作证明照不清晰（有模糊、涂改、变形、截断、PS等情况）
+			</div>
+		</div>
+	</div>
+	<div class="feedback-results-container modify"
+		th:if="${session.schoolman.yesorno==null&&session.schoolman.uptime!=null}">
+		<div class="feedback-results-title">
+			<div class="feedback-results-content">正在审核中，请耐心等待...</div>
+		</div>
+	</div>
+	<div class="feedback-results-container modify"
+		th:if="${session.schoolman.yesorno==null&&session.schoolman.uptime==null}">
+		<div class="feedback-results-title">
+			<div class="feedback-results-content">
+				<a href="/schoolman/IdentityLoad">完成身份认证后，即可发布职位！</a>
+			</div>
+		</div>
+	</div>
+	<div id="mainDiv" th:if="${session.schoolman.yesorno=='yes'}">
+		<div id="leftDiv"></div>
+		<div id="rightDiv">
+			<div>
+				<div id="ext-comp-1001" class=" x-tab-panel" style="width: 99%;">
+					<div class="x-tab-panel-bwrap" id="ext-gen4">
+						<div class="x-tab-panel-body x-tab-panel-body-top" id="ext-gen5">
+							<div id="ext-comp-1002" class=" x-panel x-panel-noborder"
+								style="width: 1111px;">
+								<div class="x-panel-bwrap" id="ext-gen11">
+									<div
+										class="x-panel-body x-panel-body-noheader x-panel-body-noborder"
+										id="ext-gen12" style="height: auto; width: 1111px;">
+										<div id="tabs1" class=" divPadding">
+											<form action="/schoolman/CheckGraduatesByInform">
+											学院：<input style="width: 150px; height: 40px;" name="college"></input>
+											学历：<select name="education"  style="width: 50px; height: 40px;">
+												<option></option>
+												<option>本科</option>
+												<option>硕士</option>
+												<option>博士</option>
+												</select>
+											专业：<input name="major" style="width: 100px; height: 40px;"></input>
+											就职状态：<select name="state" style="width: 160px; height: 40px;">
+													<option></option>
+													<option value="0">未就职</option>
+													<option value="1">已就职</option>
+													</select>
+											是否与专业相关：<label><input name="majorrelevant" type="radio" value="1"
+														/>是</label> <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<label><input name="majorrelevant" type="radio" value="0"/>否</label>
+														<input type="submit" name="Button2" value="查询就业状况"
+													id="Button2" tabindex="2" class="button"><br>
+											排序关键字：<label><input name="sort1" type="radio" value="studentid"
+														/>学号</label> <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<label><input name="sort1" type="radio" value="major"/>专业</label>
+														<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<label><input name="sort1" type="radio" value="education"/>学历</label>
+														<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<label><input name="sort1" type="radio" value="state"/>就职状态</label>
+														<span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+											排序关键字：<label><input name="sort2" type="radio" value="DESC"
+														/>降序</label> <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<label><input name="sort2" type="radio" value="ASC"/>升序</label>
+											</form>就业信息：<span><font th:text="${message0}" color="#FF0000"></font></span>
+											<br>详细信息：<span><font th:text="${message}" color="#FF0000"></font></span>
+												<span id="lblbt"></span>
+											<div class="table-c">
+											<table class="datelist" cellspacing="0" cellpadding="3" 
+												border="0" id="DataGrid1" width="99%" style="Z-INDEX: 0">
+													<tr>
+														<th>学院</th>
+														<th>学历</th>
+														<th>专业</th>
+														<th>学号</th>
+														<th>姓名</th>
+														<th>期望工作</th>
+														<th>就职状态</th>
+														<th>就职公司</th>
+														<th>专业相关性</th>
+													</tr>
+													<tbody>
+													<tr th:each="graduate,userStat : ${session.graduatelist}">
+														<td th:text="${graduate.getCollege()}"></td>
+														<td th:text="${graduate.getEducation()}"></td>
+														<td th:text="${graduate.getMajor()}"></td>
+														<td th:text="${graduate.getStudentid()}"></td>
+														<td th:text="${graduate.getName()}"></td>
+														<td th:text="${graduate.getExpectedwork()}"></td>
+														<td th:if="${graduate.getState()==1}">已就职</td>
+														<td th:if="${graduate.getState()==0}">未就职</td>
+														<td th:text="${graduate.getCompany()}"></td>
+														<td th:if="${graduate.getMajorrelevant()==1}">相关</td>
+														<td th:if="${graduate.getMajorrelevant()==0}">无关</td>
+													</tr>
+												</tbody>
+											</table></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

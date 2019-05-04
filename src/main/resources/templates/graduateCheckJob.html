@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="baidu-site-verification" content="QIQ6KC1oZ6">
+<title>找工作-互联网招聘求职网</title>
+<link href="/css/loginpop_f44cefd.css" rel="stylesheet" class="lazyload">
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/layout_cb75ea0.css">
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/widgets_edb8a0d.css">
+<link rel="stylesheet" type="text/css"
+	href="//www.lgstatic.com/www/static/pkg/search-result/page/index/main.html_aio_2_3d3f26c.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_6d1830a.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_95d2830.css">
+<link href="/css/loginpop_f44cefd.css" rel="stylesheet" class="lazyload">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_997be1c.css">
+<link href="/css/main_16f99127.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/css/main.html_aio_2_5ab67db.css">
+<body>
+
+	<div id="lg_header">
+		<div id="lg_tbar">
+			<div class="inner">
+				<ul class="lg_tbar_r">
+					<li class="msg_dropdown" data-lg-tj-track-code="index_message">
+						<a class="msg_group" href="/graduate/LoadJobs"
+						data-lg-tj-id="5h00" data-lg-tj-no="idnull"
+						data-lg-tj-cid="idnull" rel="nofollow">寻找职位<em
+							class="msg_amount hide" id="headMsgAmount"></em></a> 
+					</li>
+					<li><a href="/graduate/ResumeLoad" class="bl" data-lg-tj-id="5700"
+						data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow"
+						data-lg-tj-track-code="index_resume">我的简历</a></li>
+					<li><a href="/graduate/Apply" class="bl" id="deliveryLink"
+						data-lg-tj-id="5800" data-lg-tj-no="idnull"
+						data-lg-tj-cid="idnull" rel="nofollow"
+						data-lg-tj-track-code="index_deliver" data-lg-tj-track-type="1">投递箱</a>
+						<em class="noticeDot dn" id="noticeDot_delivery"></em></li>
+
+					<li class="user_dropdown" data-lg-tj-track-code="index_user"><span
+						class="unick bl" th:if="${session.graduate.getName()==null}"
+						th:text="${session.graduate.getUsername()}+',快去完个人信息吧!'"></span> <span
+						th:if="${session.graduate.getName()!=null}" class="unick bl"
+						th:text="${session.graduate.getName()}+'你好！'"></span> <em
+						class="noticeDot dn" id="noticeDot_name"></em> <i></i>
+						<ul>
+							<li><a href="/graduate/IdentityLoad" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull">更改信息</a></li>
+							<li><a href="/graduate/UpdatePassword" data-lg-tj-id="5c00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">更改密码</a></li>
+							<li><a href="/graduatesLogin" data-lg-tj-id="5e00"
+								data-lg-tj-no="idnull" data-lg-tj-cid="idnull" rel="nofollow">退出登录</a>
+							</li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="banner">
+		<h1>职位信息</h1>
+	</div>
+	<div id="app">
+		<form id="personalInfo" class="content_container">
+			<div class="preview">
+				<h3 class="h3" th:text="'公司：'+${session.recruiter.getCompanyname()}"></h3>
+				<div class="my-company">
+					<div class="logo_bg">
+
+						<img src="" width="60" height="60" class="logo_img"
+							th:src="${session.recruiter.getCompanylogo()}">
+						<div class="content">
+							<h3 class="h3 content-h3"
+								th:text="'简称：'+${session.recruiter.getCompanyshortname()}"></h3>
+							<p class="content-p"
+								th:text="${session.recruiter.getCompanyfield()}+'/'+${session.recruiter.getCompanyscale()}+'/'+${session.recruiter.getCompanydevelop()}">行业领域/公司规模/发展阶段</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div id="app">
+		<div id="appMainContent">
+			<form id="personalInfo" class="content_container no_label">
+				<div class="preview">
+					<p class="top" id="headpicture">
+						<img alt="头像" class="avatar"
+							th:if="${session.recruiter.getHeadpic()==null}"
+							src="/userFile/recruiters/def.png"> <img alt="头像"
+							class="avatar" th:if="${session.recruiter.getHeadpic()!=null}"
+							th:src="${session.recruiter.getHeadpic()}">
+					</p>
+					<p class="bottom">
+						<span class="userName" th:text="${session.recruiter.getName()}"></span>
+						<span class="positionName"
+							th:text="${session.recruiter.getPosition()}"></span> <span
+							th:text="${session.recruiter.getMailbox()}"></span> <span
+							th:text="${session.recruiter.getCompanyname()}"></span>
+					</p>
+					<span class="tail">发布者</span>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div>
+		<form id="businessLicence" action="" enctype="multipart/form-data"
+			autocomplete="off" class="email-check-hide" method="post">
+			<div class="infos-container with-bg">
+				<ul class="infos">
+					<li class="li"><span class="info-list"></span> <span
+						class="info-content"></span></li>
+					<li class="li"><span class="info-list"></span> <span
+						class="info-content"></span></li>
+					<li class="li"><span class="info-list"></span> <span
+						class="info-content"></span></li>
+					<li class="li"><span class="info-list"></span> <span
+						class="info-content"><input type="text" readonly="readonly"
+							th:value="'岗位名称：'+${session.job.getName()}+'          工作经验：'+${session.job.getExperience()}"></span></li>
+					<li class="li"><span class="info-list"></span> <span
+						class="info-content"><input type="text" readonly="readonly"
+							th:value="'最低学历：'+${session.job.getEducation()}+'         工作性质：'+${session.job.getNature()}"></span></li>
+					<li class="li"><label class="info-list"></label> <span
+						class="info-content"><input type="text" readonly="readonly"
+							th:value="'薪资待遇：'+${session.job.getSalary()}+'         地址：'+${session.job.getCity()}+${session.job.getAddress()}"></span></li>
+					<li class="li"><span class="info-list">岗位描述：</span> <span
+						class="info-content"><input name="recruiterId"
+							type="hidden" th:value="${session.graduate.getId()}"></span></li>
+				</ul>
+			</div>
+		</form>
+		<div class="user-input-container">
+			<ul class="check-content">
+				<li class="file-upload-section"><label class="label"></label> <textarea
+						rows="3" cols="20" readonly="readonly"
+						th:text="${session.job.getDescribes()}"></textarea>
+					<div class="submit-button-div">
+						<form action="/graduate/ApplyJob">
+							<input type="hidden" name="graduateId" th:value="${session.graduate.getId()}">
+							<input type="hidden" name="jobId" th:value="${session.job.getId()}">
+							<input type="hidden" name="recruit" th:value="${session.job.getRecruit()}">
+							<input type="submit" value="申请职位" class="submit">
+						</form>
+					</div>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

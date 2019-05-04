@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Job;
 import com.example.demo.entity.Recruiter;
+import com.example.demo.entity.Schoolman;
 import com.example.demo.service.ComplexSearchService;
 import com.example.demo.service.FilesaveService;
 import com.example.demo.service.LoginService;
@@ -255,7 +256,7 @@ public class RecruiterController {
 		}
 		recruiter.setPassword(password1);
 		registerService.saveRecruiter(recruiter);
-		return "redirect:/recruiterslogin";
+		return "recruitersLogin.html";
 	}
 	
 	@RequestMapping("/recruiter/login")
@@ -269,13 +270,18 @@ public class RecruiterController {
 			m.addAttribute("message2", "请输入密码！");
 			return "recruiterslogin.html";
 		}
+		ArrayList<Recruiter> gecruiterlist = loginService.findRecruiters(username);
+		if (gecruiterlist.isEmpty()) {
+			m.addAttribute("message1", "不存在此用户名！");
+			return "recruiterslogin.html";
+		}
 		Recruiter recruiter = loginService.findRecruiter(username, password);
 		if (recruiter == null) {
 			m.addAttribute("message2", "密码错误！");
 			return "recruiterslogin.html";
 		}
 		session.setAttribute("recruiter", recruiter);
-		return "redirect:/recruiter/PersonalInformationLoad";
+		return "redirect:/recruiter/PostLoad";
 	}
 
 	@RequestMapping(value = "/recruiter/register", method = { RequestMethod.GET, RequestMethod.POST })
